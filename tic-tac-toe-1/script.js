@@ -3,7 +3,7 @@ let show = document.getElementById("show");
 let reset = document.getElementById("reset");
 let x = "X";
 let o = "O";
-let count = 1;
+let count;
 let point1 = 0;
 let point2 = 0;
 let player1;
@@ -14,6 +14,7 @@ Start();
 //girish uchun yazilan funksiya: player adlari teleb olunur
 
 function Start() {
+    count = 1;
     player1 = player1 == undefined ? prompt("Player 1's Name", x) : player1;
     player2 = player2 == undefined ? prompt("Player 2's Name", o) : player2;
 
@@ -43,7 +44,7 @@ function Table() {
 
 function Arr() {
     for (let i = 0; i < 3; i++) {
-        arr[i] = []; // bura haradan melumat gelir ve nece?
+        arr[i] = [];
     }
 }
 
@@ -59,21 +60,11 @@ function Click(i, j) {
         count++;
         Table();
         Check();
-        Check2();
-        Check3();
-        Check4();
-        Check5();
+
 
     }
 }
 
-function Check5() {
-    if (count == 10) {
-        alert("Siz berabere qaldiniz"); //yeni oyun elave ede bilmedim
-    }
-}
-
-//click funksiyasinin horizontal teyini
 
 function Check() {
     for (let i = 0; i < 3; i++) {
@@ -81,39 +72,30 @@ function Check() {
             Finish(arr[i][0]);
         }
     }
-}
-
-//click funksiyasinin vertical teyini
-
-function Check2() {
     for (let j = 0; j < 3; j++) {
         if (arr[0][j] !== undefined && arr[0][j] == arr[1][j] && arr[1][j] == arr[2][j]) {
             Finish(arr[0][j]);
         }
     }
-}
-
-function Check3() {
-    if (arr[0][0] !== undefined && arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) {
-        Finish(arr[0][0]);
-    }
-}
-
-function Check4() {
     if (arr[0][2] !== undefined && arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0]) {
         Finish(arr[0][2]);
     }
+    if (arr[0][0] !== undefined && arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) {
+        Finish(arr[0][0]);
+    }
+    if (count == 10) {
+        alert("Siz berabere qaldiniz"); //yeni oyun elave ede bilmedim
+    }
 }
 
 
-function Finish(participant) { //ANLAMADIM 
+
+function Finish(participant) {
     alert(participant == player1 ? `${player1} Won` : `${player2} Won`);
     participant == player1 ? point1++ : point2++;
     Start();
 }
 
 function Reset() {
-
-    //yaza bilmedim :(
-    reset.innerHTML;
+    location.reload();
 }
